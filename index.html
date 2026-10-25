@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skinlines Art Space</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Fine line, freehand and body-flow tattoos, permanent makeup, laser removal and scar camouflage. Tattoo studio and art space on Pink Street, Lisbon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:ital,wght@0,300..600;1,300..600&family=Ms+Madi&display=swap">
+<style>
+/* Layout: one continuous ink line draws itself down the page as you scroll, stitching the light
+   sections together; two dark bands (studio, visit) interrupt it like skin under a sleeve.
+   Editorial grid, big Didone display type, flat edges, whitespace doing the work. Single look (brand). */
+:root{
+  --bone:#F1ECE3;
+  --bone-2:#E6DFD2;
+  --ink:#15130F;
+  --ink-2:#56514A;
+  --ink-3:#8A857C;
+  --olive:#4A5538;
+  --olive-2:#3B4430;
+  --skin:#D9B9A2;
+  --rule:rgba(21,19,15,.16);
+  --rule-light:rgba(241,236,227,.18);
+  --display:'Bodoni Moda','Didot','Bodoni 72','Times New Roman',serif;
+  --body:'Jost','Futura','Avenir Next','Segoe UI',system-ui,sans-serif;
+  --script:'Ms Madi','Brush Script MT','Segoe Script',cursive;
+  --gutter:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+  --max:1280px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--bone);color:var(--ink);
+  font-family:var(--body);font-size:1.0625rem;line-height:1.6;font-weight:400;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bone)}
+img,svg,canvas{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--olive);outline-offset:4px}
+::selection{background:var(--skin);color:var(--ink)}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;text-wrap:balance;letter-spacing:-.012em}
+p{margin:0}
+
+/* ---------- grain ---------- */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");}
+
+/* ---------- thread (scroll-drawn line) ---------- */
+.thread{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:2;overflow:visible}
+.thread path{fill:none;stroke:var(--ink);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;opacity:.34}
+
+/* ---------- wrap ---------- */
+.wrap{max-width:var(--max);margin-inline:auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
+.eyebrow{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--ink-3)}
+.band .eyebrow{color:rgba(241,236,227,.62)}
+.lead{font-size:clamp(1.1rem,1.6vw,1.35rem);line-height:1.5;color:var(--ink-2);max-width:34em;font-weight:300}
+.sec{position:relative;z-index:3;padding-block:clamp(4.5rem,10vw,9rem)}
+.sec-head{display:grid;gap:1.25rem;margin-bottom:clamp(2.5rem,5vw,4.5rem)}
+.sec-head h2{font-size:clamp(2.4rem,5.4vw,4.6rem);line-height:1.02;max-width:12em}
+.sec-head h2 em{font-style:italic;font-weight:400}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.5rem;border-radius:999px;border:1px solid var(--ink);
+  background:var(--ink);color:var(--bone);font:500 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;transition:transform .35s cubic-bezier(.2,.7,.2,1),background .3s,color .3s;cursor:pointer}
+.btn:hover{transform:translateY(-2px);background:var(--olive);border-color:var(--olive)}
+.btn--ghost{background:transparent;color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+.band .btn--ghost{color:var(--bone);border-color:rgba(241,236,227,.5)}
+.band .btn--ghost:hover{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.btn svg{width:14px;height:14px}
+.link{display:inline-flex;align-items:baseline;gap:.5rem;font:500 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:.35rem;transition:gap .3s}
+.link:hover{gap:.9rem}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
+.nav.is-solid{background:rgba(241,236,227,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:76px}
+.wordmark{font-family:var(--script);font-size:2.05rem;line-height:1;letter-spacing:.01em;transform:translateY(2px)}
+.nav-links{display:flex;gap:2rem;align-items:center;list-style:none;margin:0;padding:0}
+.nav-links a{font:500 .74rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;position:relative;padding-block:.4rem}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:currentColor;transition:right .35s}
+.nav-links a:hover::after{right:0}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.lang{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px;gap:2px}
+.lang button{all:unset;cursor:pointer;font:500 .68rem/1 var(--body);letter-spacing:.12em;padding:.5rem .7rem;border-radius:999px;color:var(--ink-3)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bone)}
+.nav .btn{padding:.8rem 1.2rem}
+.burger{all:unset;cursor:pointer;display:none;width:44px;height:44px;place-items:center;position:relative}
+.burger span{display:block;width:24px;height:1.5px;background:var(--ink);transition:transform .35s,opacity .3s;position:absolute}
+.burger span:first-child{transform:translateY(-4px)}.burger span:last-child{transform:translateY(4px)}
+.nav--open .burger span:first-child{transform:rotate(45deg)}.nav--open .burger span:last-child{transform:rotate(-45deg)}
+.menu{position:fixed;inset:0;background:var(--bone);z-index:45;display:grid;align-content:center;padding:6rem var(--gutter-r) 3rem var(--gutter);transform:translateY(-100%);transition:transform .55s cubic-bezier(.7,0,.2,1);overflow:auto}
+.nav--open ~ .menu{transform:none}
+.menu ul{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.menu a{font-family:var(--display);font-size:clamp(2.4rem,10vw,4rem);line-height:1.1}
+.menu .menu-foot{margin-top:2.5rem;display:grid;gap:1rem;color:var(--ink-2);font-size:.95rem}
+
+/* ---------- hero ---------- */
+.hero{position:relative;z-index:3;padding-top:calc(76px + env(safe-area-inset-top,0px) + clamp(3rem,8vw,7rem));padding-bottom:clamp(4.5rem,7vw,6.5rem);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,4vw,4rem);align-items:end}
+.hero-copy{display:grid;gap:clamp(1.5rem,3vw,2.5rem);min-width:0}
+.hero h1{font-size:clamp(3rem,9.2vw,8.4rem);line-height:.94;letter-spacing:-.02em;max-width:7.5em}
+.hero h1 em{font-style:italic;font-weight:400}
+.hero-actions{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center}
+.hero-meta{display:flex;flex-wrap:wrap;gap:.5rem 2rem;color:var(--ink-3);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding-top:1.5rem;border-top:1px solid var(--rule)}
+.hero-art{position:relative;min-width:0}
+.hero-art .frame{position:relative;aspect-ratio:3/4;max-width:100%;background:var(--bone-2);overflow:hidden}
+.hero-art .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.approach-art{margin-top:2.2rem;aspect-ratio:3/4;max-width:360px;position:relative;background:var(--bone-2);overflow:hidden}
+.approach-art canvas{position:absolute;inset:0;width:100%;height:100%}
+.ph{overflow:hidden;background:var(--bone-2);max-width:100%}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.studio-ph{aspect-ratio:5/4;max-width:100%;overflow:hidden;background:var(--olive-2);margin-bottom:2rem}
+.studio-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem;margin-bottom:clamp(3rem,6vw,5rem)}
+.gallery figure{margin:0;display:grid;gap:.7rem;min-width:0}
+.gallery .ph{aspect-ratio:4/5}
+.gallery .ph img,.founder-ph img{height:114%;margin-top:-7%}
+.gallery figcaption{display:flex;justify-content:space-between;gap:1rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.gallery figcaption a{color:var(--ink-2)}
+.gallery figcaption a:hover{color:var(--ink)}
+.hero-art .seal{position:absolute;left:-28px;bottom:36px;width:116px;height:116px;border-radius:50%;background:var(--bone);border:1px solid var(--ink);display:grid;place-items:center;font-family:var(--script);font-size:1.7rem;transform:rotate(-8deg);box-shadow:0 20px 40px -24px rgba(21,19,15,.5)}
+.hero-art .seal svg{position:absolute;inset:0;width:100%;height:100%}
+.hero-art .seal span{position:relative;transform:translateY(2px)}
+.hero-art .caption{position:absolute;right:0;bottom:-1.6rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.hero-cue{position:absolute;left:var(--gutter);bottom:1.4rem;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:.8rem}
+.hero-cue i{display:block;width:1px;height:38px;background:var(--ink-3);transform-origin:top;animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* ---------- loader (one line, then the name) ---------- */
+.loader{position:fixed;inset:0;z-index:100;background:var(--bone);display:grid;place-items:center}
+.loader-inner{display:grid;gap:.2rem;justify-items:center}
+.loader svg{width:min(62vw,340px);height:auto;overflow:visible}
+.loader path{fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linecap:round}
+.loader .wordmark{font-size:clamp(2.6rem,8vw,4rem);transform:none}
+html:not(.has-js) .loader{display:none}
+/* word masks for headline reveals */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.1em .04em .16em;margin:-.1em -.04em -.16em}
+.wi{display:inline-block;will-change:transform}
+/* seal slowly turning */
+.hero-art .seal svg{animation:spin 28s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* floating preview over the styles list */
+.peek{position:fixed;left:0;top:0;width:210px;aspect-ratio:4/5;pointer-events:none;z-index:40;opacity:0;overflow:hidden;background:var(--bone-2);box-shadow:0 30px 60px -30px rgba(21,19,15,.55)}
+.peek img{width:100%;height:100%;object-fit:cover;display:block}
+/* nav slides away while scrolling down */
+.nav{transition:background .4s,backdrop-filter .4s,border-color .4s,transform .5s cubic-bezier(.2,.7,.2,1)}
+.nav.is-hidden{transform:translateY(-110%)}
+.btn svg{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.btn:hover svg{transform:translate(3px,-3px)}
+
+/* ---------- marquee ---------- */
+.marquee{position:relative;z-index:3;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);overflow:hidden;white-space:nowrap;padding-block:1.05rem;font-family:var(--display);font-size:clamp(1.1rem,1.7vw,1.4rem);font-style:italic;color:var(--ink-2)}
+.marquee-track{display:inline-flex;gap:3rem;animation:marquee 46s linear infinite;will-change:transform}
+.marquee span{display:inline-flex;align-items:center;gap:3rem}
+.marquee span::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--skin);display:inline-block}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ---------- approach ---------- */
+.approach .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,6vw,6rem)}
+.approach .sec-head{margin-bottom:0;align-content:start;position:sticky;top:calc(96px + env(safe-area-inset-top,0px))}
+.steps{list-style:none;margin:0;padding:0;display:grid}
+.step{position:relative;display:grid;grid-template-columns:4.5rem minmax(0,1fr);gap:1.5rem;padding-block:2.2rem}
+.step:last-child{border-bottom:1px solid var(--rule)}
+/* separators draw themselves from the left when they come into view */
+.step::before,.styles li::after,.facts li::after,.hours li::after,.contact .row::after{content:"";position:absolute;left:0;right:0;height:1px;transform:scaleX(0);transform-origin:left;transition:transform 1.3s cubic-bezier(.2,.7,.2,1)}
+.step::before{top:0;background:var(--rule)}
+.styles li::after{bottom:0;background:var(--rule)}
+.facts li::after,.hours li::after,.contact .row::after{bottom:0;background:var(--rule-light)}
+.step.is-in::before,.styles li.is-in::after,.facts li.is-in::after,.hours li.is-in::after,.contact .row.is-in::after,
+html:not(.has-js) .step::before,html:not(.has-js) .styles li::after,html:not(.has-js) .facts li::after,html:not(.has-js) .hours li::after,html:not(.has-js) .contact .row::after{transform:scaleX(1)}
+.step .n{font-family:var(--display);font-size:1.1rem;color:var(--ink-3);font-variant-numeric:tabular-nums;padding-top:.35rem}
+.step h3{font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.1;margin-bottom:.7rem}
+.step p{color:var(--ink-2);max-width:32em;font-weight:300}
+.note{margin-top:2.5rem;padding:1.6rem 1.8rem;border:1px solid var(--rule);display:grid;gap:.5rem;font-size:.95rem;color:var(--ink-2)}
+.note strong{font-family:var(--display);font-weight:400;font-style:italic;font-size:1.35rem;color:var(--ink)}
+
+/* ---------- bands ---------- */
+.band{position:relative;z-index:3;color:var(--bone)}
+.band--olive{background:var(--olive)}
+.band--ink{background:var(--ink)}
+.band h2,.band h3{color:var(--bone)}
+.band .lead{color:rgba(241,236,227,.78)}
+.studio .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,6vw,6rem);align-items:start}
+.studio .sec-head{margin-bottom:0}
+.studio .sec-head h2{max-width:10em}
+.facts{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--rule-light)}
+.facts li{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:baseline;padding-block:1.1rem;font-size:.95rem}
+.facts li span:first-child{color:rgba(241,236,227,.62);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+.facts li span:last-child{font-family:var(--display);font-size:1.2rem;text-align:right}
+.calendar{margin-top:2.6rem;display:grid;gap:1rem}
+.calendar h3{font-size:1.5rem;font-style:italic}
+.calendar p{color:rgba(241,236,227,.78);font-weight:300;max-width:30em}
+.pill-row{display:flex;flex-wrap:wrap;gap:.6rem}
+.pill{font:500 .7rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(241,236,227,.4);padding:.55rem .85rem;border-radius:999px}
+
+/* ---------- styles list ---------- */
+.styles{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.styles li{position:relative;display:grid;grid-template-columns:76px minmax(0,1fr);gap:1.5rem;align-items:center;padding-block:1.4rem;transition:padding .35s}
+.styles li:hover{padding-left:.6rem}
+.styles .th{width:76px;aspect-ratio:1;overflow:hidden;background:var(--bone-2)}
+.styles .th img{width:100%;height:100%;object-fit:cover;display:block}
+.styles .tx{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr) auto;gap:1.5rem;align-items:baseline;min-width:0}
+.styles h3{font-size:clamp(1.9rem,3.6vw,3.2rem);line-height:1.05;transition:font-style .2s}
+.styles li:hover h3{font-style:italic}
+.styles p{color:var(--ink-2);font-weight:300;max-width:30em}
+.styles .tag{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);font-weight:500;white-space:nowrap}
+.work-cta{margin-top:3rem;display:flex;justify-content:flex-end}
+
+/* ---------- services ---------- */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+.svc{position:relative;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;gap:1.3rem;padding:2rem 1.8rem;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-height:300px;min-width:0}
+.svc::before{content:"";position:absolute;left:0;right:0;bottom:0;height:0;background:var(--bone-2);transition:height .55s cubic-bezier(.2,.7,.2,1)}
+.svc:hover::before{height:100%}
+.svc>*{position:relative}
+.svc .k{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.svc h3{font-size:clamp(1.7rem,2.4vw,2.2rem);line-height:1.08;margin-top:.4rem}
+.svc p{color:var(--ink-2);font-weight:300;font-size:.98rem}
+.svc .price{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--ink-3)}
+.svc .price b{font-family:var(--display);font-weight:400;font-size:1.35rem;letter-spacing:0;text-transform:none;color:var(--ink);font-variant-numeric:tabular-nums}
+.svc--cta{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+.svc--cta::before{background:var(--olive-2)}
+.svc--cta h3{color:var(--bone)}.svc--cta p{color:rgba(241,236,227,.75)}.svc--cta .k{color:rgba(241,236,227,.6)}
+.svc--cta .btn{justify-self:start;background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.svc--cta .btn:hover{background:var(--skin);border-color:var(--skin)}
+.fine{margin-top:1.4rem;font-size:.85rem;color:var(--ink-3)}
+
+/* ---------- artists ---------- */
+.founder{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,3fr) minmax(0,5fr);gap:clamp(2rem,4vw,4rem);align-items:start;padding-block:2.5rem;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.founder-ph{aspect-ratio:4/5}
+.crew .ph{aspect-ratio:1;margin:-1.8rem -1.6rem 0}
+.founder-name{display:grid;gap:.6rem}
+.founder-name h3{font-size:clamp(2.4rem,5vw,4.2rem);line-height:1;font-style:italic}
+.founder-name .role{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.founder-bio{display:grid;gap:1.4rem;color:var(--ink-2);font-weight:300;max-width:36em}
+.founder-bio .link{color:var(--ink);justify-self:start}
+.crew{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-top:0}
+.crew li{background:var(--bone);padding:1.8rem 1.6rem;display:grid;gap:.9rem;min-width:0;transition:background .3s}
+.crew li:hover{background:var(--bone-2)}
+.crew .k{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.crew h3{font-size:1.9rem;line-height:1}
+.crew a{font-size:.9rem;color:var(--ink-2);display:inline-flex;gap:.5rem;align-items:center;justify-self:start}
+.crew a:hover{color:var(--ink)}
+.crew li.guest{background:var(--olive);color:var(--bone)}
+.crew li.guest .k{color:rgba(241,236,227,.6)}.crew li.guest h3{color:var(--bone);font-style:italic}
+.crew li.guest p{font-weight:300;color:rgba(241,236,227,.8);font-size:.95rem}
+.crew li.guest a{color:var(--bone)}
+
+/* ---------- press ---------- */
+.press .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,6vw,6rem);align-items:start}
+.quote{display:grid;gap:1.6rem}
+.quote blockquote{margin:0;font-family:var(--display);font-size:clamp(1.7rem,3.2vw,2.8rem);line-height:1.15;text-wrap:balance}
+.quote blockquote::before{content:"“";display:block;font-size:4rem;line-height:.4;color:var(--skin);margin-bottom:1.2rem}
+.quote cite{font-style:normal;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.aside{display:grid;gap:1.4rem;padding:2rem;border:1px solid var(--rule);background:var(--bone-2)}
+.aside h3{font-size:1.5rem;font-style:italic}
+.aside p{color:var(--ink-2);font-weight:300;font-size:.98rem}
+.flags{display:flex;flex-wrap:wrap;gap:.5rem}
+.flags span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;border:1px solid var(--rule);padding:.45rem .7rem;color:var(--ink-2)}
+
+/* ---------- visit ---------- */
+.visit .wrap{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(2rem,6vw,6rem)}
+.visit .sec-head{margin-bottom:0}
+.visit address{font-style:normal;font-family:var(--display);font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1.25;margin-top:1.5rem}
+.visit .sub{color:rgba(241,236,227,.7);font-weight:300;margin-top:.6rem;max-width:30em}
+.visit-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.2rem}
+.hours{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-light)}
+.hours li{position:relative;display:flex;justify-content:space-between;gap:1rem;padding-block:1rem;font-size:1rem}
+.hours li span:last-child{font-variant-numeric:tabular-nums;font-family:var(--display);font-size:1.25rem}
+.contact{margin-top:2.4rem;display:grid;gap:1.2rem}
+.contact .row{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem;padding-block:1rem}
+.contact .row .k{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(241,236,227,.62);font-weight:500}
+.contact .row .v{font-family:var(--display);font-size:1.3rem;font-variant-numeric:tabular-nums;user-select:all}
+.copy{all:unset;cursor:pointer;font:500 .68rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(241,236,227,.4);padding:.5rem .8rem;border-radius:999px;transition:background .3s,color .3s}
+.copy:hover{background:var(--bone);color:var(--ink)}
+.booking{margin-top:2rem;padding:1.6rem 1.8rem;border:1px solid rgba(241,236,227,.25);display:grid;gap:.6rem}
+.booking strong{font-family:var(--display);font-weight:400;font-style:italic;font-size:1.4rem}
+.booking p{color:rgba(241,236,227,.75);font-weight:300;font-size:.95rem}
+
+/* ---------- footer ---------- */
+.foot{position:relative;z-index:3;background:var(--ink);color:rgba(241,236,227,.7);border-top:1px solid rgba(241,236,227,.12);padding-block:2.5rem 3rem;font-size:.85rem}
+.foot .wrap{display:grid;gap:2rem}
+.foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1.5rem}
+.foot .wordmark{font-size:3.4rem;color:var(--bone)}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:1.5rem}
+.foot ul a{font:500 .7rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:rgba(241,236,227,.75)}
+.foot ul a:hover{color:var(--bone)}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;padding-top:1.5rem;border-top:1px solid rgba(241,236,227,.12);font-size:.78rem;color:rgba(241,236,227,.5)}
+.proto{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;border:1px dashed rgba(241,236,227,.3);padding:.4rem .7rem;color:rgba(241,236,227,.6)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1024px){
+  .nav-links{display:none}
+  .burger{display:grid}
+  .nav .btn{display:none}
+  .approach .sec-head{position:static}
+}
+@media (max-width:860px){
+  .hero .wrap,.approach .wrap,.studio .wrap,.press .wrap,.visit .wrap,.founder{grid-template-columns:1fr}
+  .hero-art{order:-1}
+  .hero-art .frame{aspect-ratio:4/5;max-height:62vh}
+  .approach-art{max-width:100%;aspect-ratio:4/3}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+  .gallery figcaption{flex-direction:column;gap:.2rem}
+  .styles li{grid-template-columns:60px minmax(0,1fr);align-items:start}
+  .styles .th{width:60px}
+  .styles .tx{grid-template-columns:1fr;gap:.4rem}
+  .styles .tag{order:-1}
+  .hero-art .seal{left:auto;right:12px;bottom:-26px;width:96px;height:96px;font-size:1.4rem}
+  .hero-art .caption{display:none}
+  .hero-cue{display:none}
+  .step{grid-template-columns:3rem minmax(0,1fr);gap:1rem}
+}
+@media (max-width:480px){
+  .nav .wrap{height:68px}
+  .hero{padding-top:calc(68px + env(safe-area-inset-top,0px) + 2rem)}
+  .lang button{padding:.45rem .55rem}
+  .svc{min-height:0}
+}
+/* the script adds .reduce to <html> when the OS asks for reduced motion (unless ?motion=1 is in the URL) */
+html.reduce .loader{display:none}
+html.reduce .hero-art .seal svg{animation:none}
+html.reduce .step::before,html.reduce .styles li::after,html.reduce .facts li::after,html.reduce .hours li::after,html.reduce .contact .row::after{transform:scaleX(1);transition:none}
+html.reduce .marquee-track{animation:none}
+html.reduce .hero-cue i{animation:none}
+html.reduce *{transition-duration:0s!important}
+</style>
+</head>
+<body>
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <svg viewBox="0 0 340 90"><path id="loaderLine" d="M6 70 C 50 10, 95 92, 150 50 S 230 6, 270 46 S 320 80, 334 36"></path></svg>
+    <span class="wordmark">Skinlines</span>
+  </div>
+</div>
+<div class="peek" id="peek" aria-hidden="true"><img src="img/work-horse-detail.jpg" alt=""></div>
+<div class="grain" aria-hidden="true"></div>
+<svg class="thread" aria-hidden="true"><path id="threadPath" d=""></path></svg>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="wordmark" href="#top" aria-label="Skinlines, back to top">Skinlines</a>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="#approach" data-i18n="nav.approach">Approach</a></li>
+        <li><a href="#studio" data-i18n="nav.studio">Studio</a></li>
+        <li><a href="#work" data-i18n="nav.work">Work</a></li>
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#artists" data-i18n="nav.artists">Artists</a></li>
+        <li><a href="#visit" data-i18n="nav.visit">Visit</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" id="langEn" aria-pressed="true" data-lang="en">EN</button>
+        <button type="button" id="langPt" aria-pressed="false" data-lang="pt">PT</button>
+      </div>
+      <a class="btn" href="https://ig.me/m/lisbon_skinlines_studio" target="_blank" rel="noopener"><span data-i18n="nav.book">Book via DM</span></a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu" aria-hidden="true">
+  <ul>
+    <li><a href="#approach" data-i18n="nav.approach">Approach</a></li>
+    <li><a href="#studio" data-i18n="nav.studio">Studio</a></li>
+    <li><a href="#work" data-i18n="nav.work">Work</a></li>
+    <li><a href="#services" data-i18n="nav.services">Services</a></li>
+    <li><a href="#artists" data-i18n="nav.artists">Artists</a></li>
+    <li><a href="#visit" data-i18n="nav.visit">Visit</a></li>
+  </ul>
+  <div class="menu-foot">
+    <a class="btn" href="https://ig.me/m/lisbon_skinlines_studio" target="_blank" rel="noopener"><span data-i18n="nav.book">Book via DM</span></a>
+    <span data-i18n="vi.addr2">Rua Nova do Carvalho 66, 4th floor · Pink Street · Lisboa</span>
+  </div>
+</div>
+
+<main id="top">
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow rise" data-i18n="hero.eyebrow">Tattoo studio &amp; art space · Pink Street, Lisbon</p>
+        <h1 class="rise" data-i18n="hero.h1">Lines that <em>follow</em> the body.</h1>
+        <p class="lead rise" data-i18n="hero.lead">Fine line, freehand and body-flow tattoos, drawn directly on the skin. Permanent makeup, laser removal and scar camouflage in the same studio, on the fourth floor of Pink Street.</p>
+        <div class="hero-actions rise">
+          <a class="btn" href="https://ig.me/m/lisbon_skinlines_studio" target="_blank" rel="noopener"><span data-i18n="hero.cta1">Book via Instagram</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 13 13 3M6 3h7v7"/></svg></a>
+          <a class="link" href="#services" data-i18n="hero.cta2">Flash days &amp; walk-ins</a>
+        </div>
+        <div class="hero-meta rise">
+          <span data-i18n="hero.m1">Open every day</span>
+          <span data-i18n="hero.m2">Guest artists welcome</span>
+          <span data-i18n="hero.m3">Est. May 2026</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="frame"><img src="img/hero-horse.jpg" alt="Fine-line horse and wing tattooed across the upper back, by Olesia" fetchpriority="high"></div>
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 116 116"><path id="sealArc" d="M58 58 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0" fill="none"/><text font-family="Jost, sans-serif" font-size="8.2" letter-spacing="2.6" fill="#15130F"><textPath href="#sealArc" startOffset="2%">PINK STREET · LISBOA · TATTOO · ART SPACE ·</textPath></text></svg>
+          <span>Skinlines</span>
+        </div>
+        <p class="caption" data-i18n="hero.caption">Fine line horse · Olesia · Lisbon, 2026</p>
+      </div>
+    </div>
+    <div class="hero-cue" aria-hidden="true"><i></i><span data-i18n="hero.cue">Scroll</span></div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marquee">
+      <span>Fine line</span><span>Freehand</span><span>Body flow</span><span data-i18n="mq.realism">Realism</span><span>Black &amp; grey</span><span data-i18n="mq.pmu">Permanent makeup</span><span data-i18n="mq.laser">Laser removal</span><span data-i18n="mq.scar">Scar camouflage</span><span>Guest artists</span><span>Sketch club</span>
+      <span>Fine line</span><span>Freehand</span><span>Body flow</span><span data-i18n="mq.realism">Realism</span><span>Black &amp; grey</span><span data-i18n="mq.pmu">Permanent makeup</span><span data-i18n="mq.laser">Laser removal</span><span data-i18n="mq.scar">Scar camouflage</span><span>Guest artists</span><span>Sketch club</span>
+    </div>
+  </div>
+
+  <!-- ========== APPROACH ========== -->
+  <section class="sec approach" id="approach">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i18n="ap.eyebrow">The approach</p>
+        <h2 data-i18n="ap.h2">Drawn on the body, <em>not on paper.</em></h2>
+        <p class="lead" data-i18n="ap.lead">Part of every freehand design is sketched straight onto the skin, following proportions, muscles and the way you move. The concept is agreed before the session. The final lines happen in it.</p>
+        <div class="approach-art" aria-hidden="true"><canvas id="flow"></canvas></div>
+      </div>
+      <div>
+        <ol class="steps">
+          <li class="step reveal"><span class="n">01</span><div><h3 data-i18n="ap.s1h">Conversation</h3><p data-i18n="ap.s1p">Tell us the story, the placement and the size. Reference images help, but a rough idea is enough to start.</p></div></li>
+          <li class="step reveal"><span class="n">02</span><div><h3 data-i18n="ap.s2h">Lines on skin</h3><p data-i18n="ap.s2p">The design is sketched freehand on the body and adjusted until it sits right with how you stand and move.</p></div></li>
+          <li class="step reveal"><span class="n">03</span><div><h3 data-i18n="ap.s3h">Ink</h3><p data-i18n="ap.s3p">Session with quality materials and full preparation. Water, coffee and something to eat for the longer ones.</p></div></li>
+        </ol>
+        <div class="note reveal">
+          <strong data-i18n="ap.noteh">Body flow is made once.</strong>
+          <span data-i18n="ap.notep">An abstract piece that follows the shape and movement of one body is never repeated for another person.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STUDIO (band) ========== -->
+  <section class="sec band band--olive studio" id="studio">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i18n="st.eyebrow">The studio</p>
+        <h2 data-i18n="st.h2">More than a tattoo shop.</h2>
+        <p class="lead" data-i18n="st.lead">Skinlines Art Space opened on 1 May 2026 on Pink Street, in Cais do Sodré. The name joins the lines drawn on skin with the lines of the body. Artists from different countries tattoo here, and the studio hosts sketch club nights with a live model and acrylic painting sessions.</p>
+        <div class="calendar reveal">
+          <h3 data-i18n="st.calh">Art space calendar</h3>
+          <p data-i18n="st.calp">Sketch club, painting sessions, guest residencies and exhibitions. Dates are announced on Instagram.</p>
+          <div class="pill-row">
+            <span class="pill" data-i18n="st.p1">Sketch club</span>
+            <span class="pill" data-i18n="st.p2">Painting sessions</span>
+            <span class="pill" data-i18n="st.p3">Guest residencies</span>
+            <span class="pill" data-i18n="st.p4">Exhibitions</span>
+          </div>
+        </div>
+      </div>
+      <div>
+      <div class="studio-ph reveal"><img src="img/studio.jpg" alt="Inside Skinlines: green sofa, plants and framed art under a skylight" loading="lazy"></div>
+      <ul class="facts reveal">
+        <li><span data-i18n="st.f1k">Opened</span><span data-i18n="st.f1v">1 May 2026</span></li>
+        <li><span data-i18n="st.f2k">Where</span><span data-i18n="st.f2v">Pink Street, 4th floor</span></li>
+        <li><span data-i18n="st.f3k">Artists from</span><span data-i18n="st.f3v">Ukraine · Brazil · Romania</span></li>
+        <li><span data-i18n="st.f4k">Specialties</span><span data-i18n="st.f4v">Fine line · Realism · Black &amp; grey</span></li>
+        <li><span data-i18n="st.f5k">Guest spots</span><span data-i18n="st.f5v">Open</span></li>
+        <li><span data-i18n="st.f6k">Languages at the chair</span><span data-i18n="st.f6v">EN · PT · UA · RU</span></li>
+      </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WORK / STYLES ========== -->
+  <section class="sec work" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i18n="wk.eyebrow">The work</p>
+        <h2 data-i18n="wk.h2">Styles we <em>draw in.</em></h2>
+      </div>
+      <div class="gallery">
+        <figure class="reveal"><div class="ph"><img src="img/work-horse-detail.jpg" alt="Close-up of a fine-line horse with flowing mane" loading="lazy"></div><figcaption><span data-i18n="ga.1">Fine line horse</span><a href="https://www.instagram.com/olesya_tattoo/" target="_blank" rel="noopener">@olesya_tattoo</a></figcaption></figure>
+        <figure class="reveal"><div class="ph"><img src="img/work-bluejay.jpg" alt="Blue jay tattooed in colour realism on a forearm" loading="lazy"></div><figcaption><span data-i18n="ga.2">Blue jay in colour realism</span><a href="https://www.instagram.com/lisbon_skinlines_studio/" target="_blank" rel="noopener">@lisbon_skinlines_studio</a></figcaption></figure>
+        <figure class="reveal"><div class="ph"><img src="img/work-scorpion.jpg" alt="Scorpion and dagger in fine line on a forearm" loading="lazy"></div><figcaption><span data-i18n="ga.3">Scorpion and dagger</span><a href="https://www.instagram.com/solar_tattoo/" target="_blank" rel="noopener">@solar_tattoo</a></figcaption></figure>
+        <figure class="reveal"><div class="ph"><img src="img/work-statue.jpg" alt="Classical statue face with geometric lines on a forearm" loading="lazy"></div><figcaption><span data-i18n="ga.4">Statue in graphic lines</span><a href="https://www.instagram.com/solar_tattoo/" target="_blank" rel="noopener">@solar_tattoo</a></figcaption></figure>
+        <figure class="reveal"><div class="ph"><img src="img/work-lettering.jpg" alt="Handwritten script lettering on the inner arm" loading="lazy"></div><figcaption><span data-i18n="ga.5">Script lettering</span><a href="https://www.instagram.com/lisbon_skinlines_studio/" target="_blank" rel="noopener">@lisbon_skinlines_studio</a></figcaption></figure>
+        <figure class="reveal"><div class="ph"><img src="img/work-wing.jpg" alt="Wing and lettering in fine line across the upper back" loading="lazy"></div><figcaption><span data-i18n="ga.6">Wing and lettering, upper back</span><a href="https://www.instagram.com/olesya_tattoo/" target="_blank" rel="noopener">@olesya_tattoo</a></figcaption></figure>
+      </div>
+      <ul class="styles">
+        <li class="reveal"><div class="th"><img src="img/work-horse-detail.jpg" alt="" loading="lazy"></div><div class="tx"><h3 data-i18n="wk.1h">Fine line</h3><p data-i18n="wk.1p">Thin, precise lines. Small symbols, lettering, botanical motifs and delicate custom pieces.</p><span class="tag" data-i18n="wk.1t">Signature</span></div></li>
+        <li class="reveal"><div class="th"><img src="img/work-wing.jpg" alt="" loading="lazy"></div><div class="tx"><h3 data-i18n="wk.2h">Freehand</h3><p data-i18n="wk.2p">Drawn straight onto the skin, no stencil. The design adapts to you, not the other way round.</p><span class="tag" data-i18n="wk.2t">Olesia</span></div></li>
+        <li class="reveal"><div class="th"><img src="img/hero-horse.jpg" alt="" loading="lazy"></div><div class="tx"><h3 data-i18n="wk.3h">Body flow</h3><p data-i18n="wk.3p">Abstract, fluid compositions that follow the shape and movement of the body. One of a kind.</p><span class="tag" data-i18n="wk.3t">Never repeated</span></div></li>
+        <li class="reveal"><div class="th"><img src="img/work-bluejay.jpg" alt="" loading="lazy"></div><div class="tx"><h3 data-i18n="wk.4h">Realism</h3><p data-i18n="wk.4p">Lifelike detail, from portraits to animals and objects, by the studio's realism artists.</p><span class="tag" data-i18n="wk.4t">Resident artists</span></div></li>
+        <li class="reveal"><div class="th"><img src="img/work-scorpion.jpg" alt="" loading="lazy"></div><div class="tx"><h3 data-i18n="wk.5h">Black &amp; grey</h3><p data-i18n="wk.5p">Depth built with shading, light and shadow.</p><span class="tag" data-i18n="wk.5t">Light &amp; shadow</span></div></li>
+        <li class="reveal"><div class="th"><img src="img/work-lettering.jpg" alt="" loading="lazy"></div><div class="tx"><h3 data-i18n="wk.6h">Lettering &amp; botanical</h3><p data-i18n="wk.6p">Words, dates and plants, mostly in fine line. The most requested small pieces.</p><span class="tag" data-i18n="wk.6t">Most requested</span></div></li>
+      </ul>
+      <div class="work-cta reveal">
+        <a class="link" href="https://www.instagram.com/lisbon_skinlines_studio/" target="_blank" rel="noopener" data-i18n="wk.cta">See the latest work on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="sec services" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i18n="sv.eyebrow">Services</p>
+        <h2 data-i18n="sv.h2">Everything on skin, <em>in one studio.</em></h2>
+      </div>
+      <div class="services-grid">
+        <article class="svc reveal">
+          <div><p class="k" data-i18n="sv.1k">By appointment</p><h3 data-i18n="sv.1h">Tattoo</h3></div>
+          <p data-i18n="sv.1p">Custom pieces in fine line, freehand, body flow, realism and black &amp; grey. Booked by DM, designed around your story.</p>
+          <div class="price"><span data-i18n="sv.from">From</span><b>€100</b></div>
+        </article>
+        <article class="svc reveal">
+          <div><p class="k" data-i18n="sv.2k">Selected weekends</p><h3 data-i18n="sv.2h">Flash days</h3></div>
+          <p data-i18n="sv.2p">Walk in, pick a small design from the sheet and leave with it the same day. Dates on Instagram.</p>
+          <div class="price"><span data-i18n="sv.small">Small designs</span><b>€70–80</b></div>
+        </article>
+        <article class="svc reveal">
+          <div><p class="k" data-i18n="sv.3k">Beauty</p><h3 data-i18n="sv.3h">Permanent makeup</h3></div>
+          <p data-i18n="sv.3p">Natural-looking permanent makeup, matched to your features and skin tone.</p>
+          <div class="price"><span data-i18n="sv.consult">On consultation</span><b>—</b></div>
+        </article>
+        <article class="svc reveal">
+          <div><p class="k" data-i18n="sv.4k">Correction</p><h3 data-i18n="sv.4h">Laser removal</h3></div>
+          <p data-i18n="sv.4p">Fading or removing older tattoos, in sessions spaced so the skin can recover between them.</p>
+          <div class="price"><span data-i18n="sv.consult">On consultation</span><b>—</b></div>
+        </article>
+        <article class="svc reveal">
+          <div><p class="k" data-i18n="sv.5k">Paramedical</p><h3 data-i18n="sv.5h">Scar &amp; vitiligo camouflage</h3></div>
+          <p data-i18n="sv.5p">Pigments matched to your skin tone to soften scars and vitiligo. The work that started the studio.</p>
+          <div class="price"><span data-i18n="sv.consult">On consultation</span><b>—</b></div>
+        </article>
+        <article class="svc svc--cta reveal">
+          <div><p class="k" data-i18n="sv.6k">Not sure where to start?</p><h3 data-i18n="sv.6h">Write to us.</h3></div>
+          <p data-i18n="sv.6p">Send a message with your idea, placement and a photo of the area. We answer with a quote and the next free dates.</p>
+          <a class="btn" href="https://ig.me/m/lisbon_skinlines_studio" target="_blank" rel="noopener"><span data-i18n="nav.book">Book via DM</span></a>
+        </article>
+      </div>
+      <p class="fine" data-i18n="sv.fine">Starting prices. The final quote comes after a short consultation by message.</p>
+    </div>
+  </section>
+
+  <!-- ========== ARTISTS ========== -->
+  <section class="sec artists" id="artists">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-i18n="ar.eyebrow">Artists</p>
+        <h2 data-i18n="ar.h2">Olesia and the artists <em>at Skinlines.</em></h2>
+      </div>
+      <div class="founder reveal">
+        <div class="founder-name">
+          <p class="role" data-i18n="ar.role">Founder · fine line · freehand · body flow · paramedical</p>
+          <h3>Olesia Huliaieva</h3>
+        </div>
+        <div class="ph founder-ph reveal"><img src="img/founder.jpg" alt="Client at Skinlines showing a fresh fine-line back piece, studio mirror lights behind" loading="lazy"></div>
+        <div class="founder-bio">
+          <p data-i18n="ar.bio1">Ukrainian tattoo artist, in Lisbon since 2023. Olesia came to tattooing through a question: could a relative's surgical scar be made less visible? She taught herself artistic tattooing, then trained in paramedical work with a mentor.</p>
+          <p data-i18n="ar.bio2">Her own style grew toward fine line, minimalism, abstraction and pieces that move with the body. Camouflage of scars and vitiligo is still the work she calls the most important.</p>
+          <a class="link" href="https://www.instagram.com/olesya_tattoo/" target="_blank" rel="noopener">@olesya_tattoo</a>
+        </div>
+      </div>
+      <ul class="crew">
+        <li class="reveal"><div class="ph"><img src="img/artist-igor.jpg" alt="Igor tattooing at Skinlines" loading="lazy"></div><p class="k" data-i18n="ar.k">Artist at Skinlines</p><h3>Igor</h3><a href="https://www.instagram.com/igrik.tattoo/" target="_blank" rel="noopener">@igrik.tattoo</a></li>
+        <li class="reveal"><div class="ph"><img src="img/artist-kateryna.jpg" alt="Graphic statue piece by Kateryna" loading="lazy"></div><p class="k" data-i18n="ar.k">Artist at Skinlines</p><h3>Kateryna</h3><a href="https://www.instagram.com/solar_tattoo/" target="_blank" rel="noopener">@solar_tattoo</a></li>
+        <li class="reveal"><div class="ph"><img src="img/artist-anton.jpg" alt="Anton tattooing a client at Skinlines" loading="lazy"></div><p class="k" data-i18n="ar.k">Artist at Skinlines</p><h3>Anton</h3><a href="https://www.instagram.com/anton_anton_im/" target="_blank" rel="noopener">@anton_anton_im</a></li>
+        <li class="guest reveal"><p class="k" data-i18n="ar.gk">Guest artists</p><h3 data-i18n="ar.gh">Your spot is open.</h3><p data-i18n="ar.gp">Skinlines welcomes guest artists from any country for short residencies on Pink Street.</p><a href="https://ig.me/m/lisbon_skinlines_studio" target="_blank" rel="noopener" data-i18n="ar.ga">Apply by DM →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== PRESS ========== -->
+  <section class="sec press" id="press">
+    <div class="wrap">
+      <div class="quote reveal">
+        <p class="eyebrow" data-i18n="pr.eyebrow">In the press</p>
+        <blockquote lang="pt">No novo estúdio de Lisboa, Olesia faz tatuagens desenhadas diretamente no corpo</blockquote>
+        <cite>NiT · 2026</cite>
+        <a class="link" href="https://www.nit.pt/compras/lojas-e-marcas/no-novo-estudio-de-lisboa-olesia-faz-tatuagens-desenhadas-diretamente-no-corpo" target="_blank" rel="noopener" data-i18n="pr.cta">Read the feature</a>
+      </div>
+      <div class="aside reveal">
+        <h3 data-i18n="pr.h3">A studio people fly in for</h3>
+        <p data-i18n="pr.p1">On a normal day you hear several languages in the room. Clients come from across Europe and the US, and the guest list already includes Benfica and Ukraine goalkeeper Anatoliy Trubin, tattooed by a visiting artist from Kyiv.</p>
+        <div class="flags"><span>US</span><span>FR</span><span>DE</span><span>NL</span><span>CH</span><span>UK</span><span>UA</span><span>PT</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VISIT (band) ========== -->
+  <section class="sec band band--ink visit" id="visit">
+    <div class="wrap">
+      <div>
+        <div class="sec-head">
+          <p class="eyebrow" data-i18n="vi.eyebrow">Visit</p>
+          <h2 data-i18n="vi.h2">Fourth floor, <em>Pink Street.</em></h2>
+        </div>
+        <address data-i18n="vi.addr">Rua Nova do Carvalho 66, 4th floor<br>1200-019 Lisboa · Pink Street</address>
+        <p class="sub" data-i18n="vi.sub">Cais do Sodré, two minutes from the metro and the train to Cascais. Ring the bell for the fourth floor.</p>
+        <div class="visit-actions">
+          <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&query=Rua+Nova+do+Carvalho+66%2C+1200-019+Lisboa" target="_blank" rel="noopener"><span data-i18n="vi.dir">Directions</span></a>
+          <a class="btn btn--ghost" href="https://www.instagram.com/lisbon_skinlines_studio/" target="_blank" rel="noopener"><span>Instagram</span></a>
+        </div>
+        <div class="booking reveal">
+          <strong data-i18n="vi.bh">Booking is by message.</strong>
+          <p data-i18n="vi.bp">Send a DM on Instagram or a WhatsApp with your idea and the area. Walk-ins are welcome on flash days.</p>
+        </div>
+      </div>
+      <div>
+        <ul class="hours reveal">
+          <li><span data-i18n="vi.h1">Monday to Friday</span><span>10:00 – 20:00</span></li>
+          <li><span data-i18n="vi.h2s">Saturday</span><span>10:00 – 02:00</span></li>
+          <li><span data-i18n="vi.h3">Sunday</span><span>10:00 – 01:00</span></li>
+        </ul>
+        <div class="contact reveal">
+          <div class="row">
+            <div><p class="k" data-i18n="vi.phone">Phone · WhatsApp</p><p class="v" id="phone">+351 924 708 088</p></div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              <button class="copy" type="button" id="copyPhone" data-i18n="vi.copy">Copy</button>
+              <a class="copy" href="https://wa.me/351924708088" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+          </div>
+          <div class="row">
+            <div><p class="k">Instagram</p><p class="v">@lisbon_skinlines_studio</p></div>
+            <a class="copy" href="https://ig.me/m/lisbon_skinlines_studio" target="_blank" rel="noopener" data-i18n="vi.dm">Send a DM</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="wordmark">Skinlines</div>
+        <p data-i18n="ft.tag">Tattoo studio &amp; art space · Pink Street, Lisboa</p>
+      </div>
+      <ul>
+        <li><a href="#approach" data-i18n="nav.approach">Approach</a></li>
+        <li><a href="#studio" data-i18n="nav.studio">Studio</a></li>
+        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+        <li><a href="#artists" data-i18n="nav.artists">Artists</a></li>
+        <li><a href="#visit" data-i18n="nav.visit">Visit</a></li>
+        <li><a href="https://www.instagram.com/lisbon_skinlines_studio/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="ft.addr">© 2026 Skinlines Art Space · Rua Nova do Carvalho 66, 4th floor · 1200-019 Lisboa</span>
+      <span data-i18n="ft.photos">Photos: @lisbon_skinlines_studio · @olesya_tattoo · @solar_tattoo</span>
+      <span class="proto" data-i18n="ft.proto">Website prototype · v1 · October 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+(function(){
+  'use strict';
+  document.documentElement.classList.add('has-js');
+  // ?motion=1 or #motion forces the animations on even when the OS asks for reduced motion (used for demos)
+  const forceMotion = /[?&]motion=1/.test(location.search) || location.hash === '#motion';
+  const reduce = !forceMotion && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) document.documentElement.classList.add('reduce');
+  const hasGsap = !reduce && !!window.gsap && !!window.ScrollTrigger;
+
+  /* ---------- word masks (headline reveals) ---------- */
+  function splitWords(el){
+    if (el.dataset.split === '1') return;
+    const walk = node => { [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const wi = document.createElement('span'); wi.className = 'wi'; wi.textContent = part;
+          w.appendChild(wi); frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) walk(n);
+    }); };
+    walk(el); el.dataset.split = '1';
+  }
+  const SPLIT = '.hero h1, .sec-head h2';
+  function splitAll(){ if (hasGsap) document.querySelectorAll(SPLIT).forEach(splitWords); }
+
+  /* ---------- i18n (EN inline, PT-PT dictionary) ---------- */
+  const PT = {
+    'nav.approach':'Abordagem','nav.studio':'Estúdio','nav.work':'Trabalho','nav.services':'Serviços','nav.artists':'Artistas','nav.visit':'Visita','nav.book':'Marcar por DM',
+    'hero.eyebrow':'Estúdio de tatuagem &amp; art space · Pink Street, Lisboa',
+    'hero.h1':'Linhas que <em>seguem</em> o corpo.',
+    'hero.lead':'Tatuagens fine line, freehand e body flow, desenhadas diretamente na pele. Maquilhagem permanente, remoção a laser e camuflagem de cicatrizes no mesmo estúdio, no 4.º andar da Pink Street.',
+    'hero.cta1':'Marcar pelo Instagram','hero.cta2':'Flash days &amp; walk-ins',
+    'hero.m1':'Aberto todos os dias','hero.m2':'Guest artists bem-vindos','hero.m3':'Desde maio de 2026',
+    'hero.caption':'Cavalo em fine line · Olesia · Lisboa, 2026','hero.cue':'Rolar',
+    'ga.1':'Cavalo em fine line','ga.2':'Gaio-azul em realismo a cores','ga.3':'Escorpião e adaga','ga.4':'Estátua em linhas gráficas','ga.5':'Lettering manuscrito','ga.6':'Asa e lettering nas costas',
+    'vi.addr':'Rua Nova do Carvalho 66, 4.º Dto<br>1200-019 Lisboa · Pink Street','vi.addr2':'Rua Nova do Carvalho 66, 4.º Dto · Pink Street · Lisboa',
+    'ft.addr':'© 2026 Skinlines Art Space · Rua Nova do Carvalho 66, 4.º Dto · 1200-019 Lisboa','ft.photos':'Fotos: @lisbon_skinlines_studio · @olesya_tattoo · @solar_tattoo',
+    'ap.eyebrow':'A abordagem','ap.h2':'Desenhado no corpo, <em>não no papel.</em>',
+    'ap.lead':'Parte de cada desenho freehand é esboçada diretamente na pele, a seguir as proporções, os músculos e a forma como te moves. O conceito fica combinado antes da sessão. As linhas finais acontecem nela.',
+    'ap.s1h':'Conversa','ap.s1p':'Conta-nos a história, o sítio e o tamanho. Imagens de referência ajudam, mas uma ideia aproximada chega para começar.',
+    'ap.s2h':'Linhas na pele','ap.s2p':'O desenho é esboçado à mão livre no corpo e ajustado até assentar bem com a forma como estás e te moves.',
+    'ap.s3h':'Tinta','ap.s3p':'Sessão com materiais de qualidade e preparação completa. Água, café e algo para comer nas sessões mais longas.',
+    'ap.noteh':'O body flow faz-se uma vez.','ap.notep':'Uma peça abstrata que segue a forma e o movimento de um corpo nunca é repetida noutra pessoa.',
+    'st.eyebrow':'O estúdio','st.h2':'Mais do que um estúdio de tatuagem.',
+    'st.lead':'O Skinlines Art Space abriu a 1 de maio de 2026 na Pink Street, no Cais do Sodré. O nome junta as linhas desenhadas na pele às linhas do corpo. Tatuam aqui artistas de vários países, e o estúdio recebe noites de sketch club com modelo ao vivo e sessões de pintura acrílica.',
+    'st.calh':'Agenda do art space','st.calp':'Sketch club, sessões de pintura, residências de guest artists e exposições. As datas são anunciadas no Instagram.',
+    'st.p1':'Sketch club','st.p2':'Sessões de pintura','st.p3':'Residências','st.p4':'Exposições',
+    'st.f1k':'Abertura','st.f1v':'1 de maio de 2026','st.f2k':'Onde','st.f2v':'Pink Street, 4.º andar','st.f3k':'Artistas de','st.f3v':'Ucrânia · Brasil · Roménia',
+    'st.f4k':'Especialidades','st.f4v':'Fine line · Realismo · Black &amp; grey','st.f5k':'Vagas para guests','st.f5v':'Abertas','st.f6k':'Línguas na cadeira','st.f6v':'EN · PT · UA · RU',
+    'wk.eyebrow':'O trabalho','wk.h2':'Estilos em que <em>desenhamos.</em>',
+    'wk.1h':'Fine line','wk.1p':'Linhas finas e precisas. Símbolos pequenos, lettering, motivos botânicos e peças personalizadas delicadas.','wk.1t':'Assinatura',
+    'wk.2h':'Freehand','wk.2p':'Desenhado diretamente na pele, sem stencil. O desenho adapta-se a ti, e não o contrário.','wk.2t':'Olesia',
+    'wk.3h':'Body flow','wk.3p':'Composições abstratas e fluidas que seguem a forma e o movimento do corpo. Peça única.','wk.3t':'Nunca repetido',
+    'wk.4h':'Realismo','wk.4p':'Detalhe realista, de retratos a animais e objetos, pelos artistas de realismo do estúdio.','wk.4t':'Artistas residentes',
+    'wk.5h':'Black &amp; grey','wk.5p':'Profundidade construída com sombreado, luz e sombra.','wk.5t':'Luz &amp; sombra',
+    'wk.6h':'Lettering &amp; botânico','wk.6p':'Palavras, datas e plantas, quase sempre em fine line. As peças pequenas mais pedidas.','wk.6t':'Mais pedido',
+    'wk.cta':'Ver os trabalhos mais recentes no Instagram',
+    'sv.eyebrow':'Serviços','sv.h2':'Tudo na pele, <em>num só estúdio.</em>',
+    'sv.1k':'Por marcação','sv.1h':'Tatuagem','sv.1p':'Peças personalizadas em fine line, freehand, body flow, realismo e black &amp; grey. Marcação por DM, desenhadas à volta da tua história.',
+    'sv.from':'Desde','sv.small':'Desenhos pequenos','sv.consult':'Sob consulta',
+    'sv.2k':'Fins de semana selecionados','sv.2h':'Flash days','sv.2p':'Entra sem marcação, escolhe um desenho pequeno da folha e sai com ele no mesmo dia. Datas no Instagram.',
+    'sv.3k':'Beleza','sv.3h':'Maquilhagem permanente','sv.3p':'Maquilhagem permanente de aspeto natural, ajustada às tuas feições e ao tom de pele.',
+    'sv.4k':'Correção','sv.4h':'Remoção a laser','sv.4p':'Clarear ou remover tatuagens antigas, em sessões espaçadas para a pele recuperar entre elas.',
+    'sv.5k':'Paramédico','sv.5h':'Camuflagem de cicatrizes &amp; vitiligo','sv.5p':'Pigmentos ajustados ao teu tom de pele para suavizar cicatrizes e vitiligo. O trabalho que deu origem ao estúdio.',
+    'sv.6k':'Não sabes por onde começar?','sv.6h':'Escreve-nos.','sv.6p':'Envia uma mensagem com a tua ideia, o sítio e uma foto da zona. Respondemos com orçamento e as próximas datas livres.',
+    'sv.fine':'Preços de partida. O orçamento final chega depois de uma breve consulta por mensagem.',
+    'ar.eyebrow':'Artistas','ar.h2':'Olesia e os artistas <em>do Skinlines.</em>',
+    'ar.role':'Fundadora · fine line · freehand · body flow · paramédico',
+    'ar.bio1':'Tatuadora ucraniana, em Lisboa desde 2023. Olesia chegou à tatuagem por uma pergunta: seria possível tornar menos visível a cicatriz cirúrgica de uma familiar? Aprendeu sozinha a tatuagem artística e depois formou-se em trabalho paramédico com uma mentora.',
+    'ar.bio2':'O estilo próprio cresceu para o fine line, o minimalismo, a abstração e peças que se movem com o corpo. A camuflagem de cicatrizes e vitiligo continua a ser o trabalho a que chama o mais importante.',
+    'ar.k':'Artista no Skinlines','ar.gk':'Guest artists','ar.gh':'O teu lugar está aberto.','ar.gp':'O Skinlines recebe guest artists de qualquer país para residências curtas na Pink Street.','ar.ga':'Candidata-te por DM →',
+    'pr.eyebrow':'Na imprensa','pr.cta':'Ler a reportagem',
+    'pr.h3':'Um estúdio para onde se voa','pr.p1':'Num dia normal ouvem-se várias línguas na sala. Os clientes vêm de toda a Europa e dos EUA, e a lista de convidados já inclui o guarda-redes do Benfica e da Ucrânia Anatoliy Trubin, tatuado por um artista convidado de Kyiv.',
+    'vi.eyebrow':'Visita','vi.h2':'Quarto andar, <em>Pink Street.</em>',
+    'vi.sub':'Cais do Sodré, a dois minutos do metro e do comboio para Cascais. Toca à campainha do 4.º andar.',
+    'vi.dir':'Direções','vi.bh':'A marcação é por mensagem.','vi.bp':'Envia uma DM no Instagram ou um WhatsApp com a tua ideia e a zona. Nos flash days, entra sem marcação.',
+    'vi.h1':'Segunda a sexta','vi.h2s':'Sábado','vi.h3':'Domingo','vi.phone':'Telefone · WhatsApp','vi.copy':'Copiar','vi.dm':'Enviar DM',
+    'ft.tag':'Estúdio de tatuagem &amp; art space · Pink Street, Lisboa','ft.proto':'Protótipo de website · v1 · outubro de 2026',
+    'mq.realism':'Realismo','mq.pmu':'Maquilhagem permanente','mq.laser':'Remoção a laser','mq.scar':'Camuflagem de cicatrizes'
+  };
+  const EN = {};
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.dataset.i18n; if (!(k in EN)) EN[k] = el.innerHTML; });
+  function setLang(lang){
+    const dict = lang === 'pt' ? PT : EN;
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.dataset.i18n; if (dict[k] != null) { el.innerHTML = dict[k]; delete el.dataset.split; } });
+    splitAll();
+    document.documentElement.lang = lang === 'pt' ? 'pt-PT' : 'en';
+    document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    try { localStorage.setItem('skinlines-lang', lang); } catch(e) {}
+    if (window.ScrollTrigger) requestAnimationFrame(() => ScrollTrigger.refresh());
+    requestAnimationFrame(buildThread);
+  }
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  let saved = null; try { saved = localStorage.getItem('skinlines-lang'); } catch(e) {}
+  if (saved === 'pt') setLang('pt');
+
+  /* ---------- nav ---------- */
+  const nav = document.getElementById('nav');
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  let lastY = window.scrollY;
+  function onScroll(){
+    const y = window.scrollY;
+    nav.classList.toggle('is-solid', y > 40);
+    nav.classList.toggle('is-hidden', y > lastY + 2 && y > 260 && !nav.classList.contains('nav--open'));
+    lastY = y;
+  }
+  onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+  function closeMenu(){ nav.classList.remove('nav--open'); burger.setAttribute('aria-expanded','false'); menu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  burger.addEventListener('click', () => {
+    const open = !nav.classList.contains('nav--open');
+    nav.classList.toggle('nav--open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    menu.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  /* ---------- smooth scroll (Lenis) ---------- */
+  let lenis = null;
+  if (!reduce && window.Lenis) {
+    lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const id = a.getAttribute('href'); if (id.length < 2) return;
+      const target = document.querySelector(id); if (!target) return;
+      e.preventDefault(); closeMenu();
+      lenis.scrollTo(target, { offset: -70, duration: 1.3 });
+    }));
+  }
+
+  /* ---------- copy phone ---------- */
+  const copyBtn = document.getElementById('copyPhone');
+  copyBtn.addEventListener('click', () => {
+    const text = document.getElementById('phone').textContent.trim();
+    const done = () => { const prev = copyBtn.textContent; copyBtn.textContent = document.documentElement.lang.startsWith('pt') ? 'Copiado' : 'Copied'; setTimeout(() => copyBtn.textContent = prev, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(() => selectPhone());
+    else selectPhone();
+    function selectPhone(){ const r = document.createRange(); r.selectNodeContents(document.getElementById('phone')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  });
+
+  /* ---------- hero canvas: body-flow ink lines ---------- */
+  (function flow(){
+    const c = document.getElementById('flow'); if (!c) return;
+    const ctx = c.getContext('2d');
+    let W, H, dpr, lines = [], start = null, raf;
+    function rnd(i){ const v = Math.sin(i*12.9898 + 78.233)*43758.5453; return v - Math.floor(v); }
+    function build(){
+      const r = c.getBoundingClientRect();
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
+      c.width = W*dpr; c.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+      lines = [];
+      // A bundle of near-parallel lines that sway together, like a body-flow piece following a limb.
+      const n = 22, spacing = W*0.028, cx = W*0.46;
+      for (let i = 0; i < n; i++) {
+        const off = (i - (n-1)/2) * spacing;
+        const y0 = -H*0.05 - rnd(i)*H*0.25, y1 = H*1.05 + rnd(i+7)*H*0.1;
+        const pts = [];
+        for (let y = y0; y <= y1; y += 3) {
+          const u = y / H;
+          const sway = Math.sin(u*Math.PI*1.35 + 0.6) * W*0.17 + Math.sin(u*Math.PI*0.6 + 2.1) * W*0.09;
+          const spread = 1 + 0.55*Math.sin(u*Math.PI*1.1 + 0.3);           // bundle opens and closes
+          const x = cx + sway + off*spread + Math.sin(u*9 + i)*1.2;
+          pts.push([x, y]);
+        }
+        lines.push({ pts, w: 0.55 + (i%4)*0.3, delay: Math.abs(i - n/2)*0.09, dur: 2.4 + rnd(i+3)*0.9 });
+      }
+      // a few stray crossing lines
+      for (let j = 0; j < 4; j++) {
+        const pts = [];
+        const ax = W*(0.05 + rnd(j+20)*0.3), ay = H*(0.15 + rnd(j+30)*0.7);
+        const bx = W*(0.75 + rnd(j+40)*0.25), by = ay + H*(0.25 + rnd(j+50)*0.4) * (j%2 ? -1 : 1);
+        for (let k = 0; k <= 120; k++) { const u = k/120; const x = ax + (bx-ax)*u, y = ay + (by-ay)*u + Math.sin(u*Math.PI)*H*0.08*(j%2?1:-1); pts.push([x, y]); }
+        lines.push({ pts, w: 0.5, delay: 1.4 + j*0.25, dur: 1.6 });
+      }
+      lines = lines.filter(L => L.pts.length > 2);
+      start = null; cancelAnimationFrame(raf); raf = requestAnimationFrame(draw);
+    }
+    function strokeLine(L, p){
+      const n = Math.max(2, Math.floor(L.pts.length * p));
+      ctx.beginPath(); ctx.moveTo(L.pts[0][0], L.pts[0][1]);
+      for (let k = 1; k < n; k++) ctx.lineTo(L.pts[k][0], L.pts[k][1]);
+      ctx.lineWidth = L.w; ctx.stroke();
+    }
+    function paintBase(){
+      // skin-like gradient ground
+      const g = ctx.createLinearGradient(0,0,W,H);
+      g.addColorStop(0,'#E9DDD0'); g.addColorStop(.55,'#E3D4C4'); g.addColorStop(1,'#D9C3B0');
+      ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+      // soft light
+      const rg = ctx.createRadialGradient(W*0.3,H*0.25,10,W*0.3,H*0.25,W*0.9);
+      rg.addColorStop(0,'rgba(255,250,244,.55)'); rg.addColorStop(1,'rgba(255,250,244,0)');
+      ctx.fillStyle = rg; ctx.fillRect(0,0,W,H);
+    }
+    function draw(ts){
+      if (start === null) start = ts;
+      const t = (ts - start)/1000;
+      paintBase();
+      ctx.strokeStyle = 'rgba(21,19,15,.86)'; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      let done = true;
+      for (const L of lines) {
+        const p = reduce ? 1 : Math.min(1, Math.max(0, (t - L.delay)/L.dur));
+        const e = 1 - Math.pow(1-p, 3);
+        if (p < 1) done = false;
+        strokeLine(L, e);
+      }
+      // stipple dots
+      ctx.fillStyle = 'rgba(21,19,15,.5)';
+      for (let i = 0; i < 40; i++) { const x = (Math.sin(i*91.7)*0.5+0.5)*W, y = (Math.cos(i*47.3)*0.5+0.5)*H; const r = 0.5 + (i%3)*0.4; const show = reduce || t > 1.2 + i*0.03; if (show) { ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); } }
+      if (!done || !reduce && t < 5) raf = requestAnimationFrame(draw);
+    }
+    let ro; if ('ResizeObserver' in window) { ro = new ResizeObserver(() => build()); ro.observe(c.parentElement); } else { window.addEventListener('resize', build); }
+    build();
+  })();
+
+  /* ---------- thread: one line stitched through the light sections, drawn by scroll ---------- */
+  const svg = document.querySelector('.thread');
+  const path = document.getElementById('threadPath');
+  let total = 0, lut = [];
+  function pageY(el){ return el.getBoundingClientRect().top + window.scrollY; }
+  function catmull(points){
+    if (points.length < 2) return '';
+    let d = `M${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)}`;
+    for (let i = 0; i < points.length - 1; i++) {
+      const p0 = points[i-1] || points[i], p1 = points[i], p2 = points[i+1], p3 = points[i+2] || p2;
+      const c1 = [p1[0] + (p2[0]-p0[0])/6, p1[1] + (p2[1]-p0[1])/6];
+      const c2 = [p2[0] - (p3[0]-p1[0])/6, p2[1] - (p3[1]-p1[1])/6];
+      d += ` C${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c2[0].toFixed(1)} ${c2[1].toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+    }
+    return d;
+  }
+  function buildThread(){
+    const W = document.documentElement.clientWidth;
+    const docH = document.documentElement.scrollHeight;
+    svg.setAttribute('width', W); svg.setAttribute('height', docH); svg.setAttribute('viewBox', `0 0 ${W} ${docH}`);
+    const g = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gutter')) || 16;
+    const narrow = W < 860;
+    const L = Math.max(g, W*0.06), R = W - Math.max(g, W*0.06);
+    const hero = document.querySelector('.hero'), ap = document.getElementById('approach'),
+          wk = document.getElementById('work'), sv = document.getElementById('services'),
+          ar = document.getElementById('artists'), pr = document.getElementById('press');
+    const seg1 = [
+      [W*0.56, pageY(hero) + hero.offsetHeight*0.34],
+      [W*0.6,  pageY(hero) + hero.offsetHeight*0.9],
+      [W*0.44, pageY(ap) + ap.offsetHeight*0.1],
+      [W*0.4,  pageY(ap) + ap.offsetHeight*0.45],
+      [W*0.46, pageY(ap) + ap.offsetHeight*0.8],
+      [W*0.5,  pageY(ap) + ap.offsetHeight*0.995]
+    ];
+    const seg2 = [
+      [W*0.5,  pageY(wk) + 2],
+      [R,      pageY(wk) + wk.offsetHeight*0.3],
+      [W*0.7,  pageY(wk) + wk.offsetHeight*0.78],
+      [W*0.45, pageY(sv) + sv.offsetHeight*0.08],
+      [L,      pageY(sv) + sv.offsetHeight*0.45],
+      [W*0.3,  pageY(sv) + sv.offsetHeight*0.9],
+      [R,      pageY(ar) + ar.offsetHeight*0.2],
+      [W*0.6,  pageY(ar) + ar.offsetHeight*0.62],
+      [W*0.2,  pageY(pr) + pr.offsetHeight*0.12],
+      [W*0.35, pageY(pr) + pr.offsetHeight*0.6],
+      [W*0.58, pageY(pr) + pr.offsetHeight*0.995]
+    ];
+    if (narrow) { // on phones the line starts under the hero copy and stays faint
+      seg1.splice(0, 2, [W*0.5, pageY(hero) + hero.offsetHeight*0.985]);
+      seg1[1][0] = W*0.5;
+    }
+    path.style.opacity = narrow ? '.2' : '';
+    path.setAttribute('d', catmull(seg1) + ' ' + catmull(seg2));
+    total = path.getTotalLength();
+    path.style.strokeDasharray = `${total} ${total}`;
+    lut = []; const N = 320;
+    for (let i = 0; i <= N; i++) { const len = total * i / N; const p = path.getPointAtLength(len); lut.push([len, p.y]); }
+    updateThread();
+  }
+  function updateThread(){
+    if (!total) return;
+    const tipY = window.scrollY + window.innerHeight * 0.72;
+    let len = total;
+    for (let i = 0; i < lut.length; i++) { if (lut[i][1] > tipY) { len = lut[i][0]; break; } }
+    path.style.strokeDashoffset = reduce ? 0 : (total - len);
+  }
+  window.addEventListener('scroll', updateThread, { passive:true });
+  let rT; window.addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(buildThread, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildThread);
+  window.addEventListener('load', buildThread);
+  buildThread();
+
+  /* ---------- motion ---------- */
+  const loader = document.getElementById('loader');
+  const removeLoader = () => { if (loader && loader.parentNode) loader.remove(); };
+  const LINES = '.step, .styles li, .facts li, .hours li, .contact .row';
+
+  if (!hasGsap) {
+    removeLoader();
+    document.querySelectorAll(LINES).forEach(el => el.classList.add('is-in'));
+  } else {
+    gsap.registerPlugin(ScrollTrigger);
+    if (lenis) { lenis.on('scroll', ScrollTrigger.update); gsap.ticker.lagSmoothing(0); }
+    splitAll();
+
+    /* opening: one line draws itself, the name appears, the curtain lifts into the hero */
+    function heroIntro(){
+      const t = gsap.timeline({ defaults: { ease: 'expo.out' } });
+      t.from('.hero .eyebrow', { opacity: 0, letterSpacing: '.5em', duration: 1.2 }, 0)
+       .from('.hero h1 .wi', { yPercent: 115, duration: 1.3, stagger: .07 }, .05)
+       .from(['.hero .lead', '.hero-actions', '.hero-meta'], { y: 26, opacity: 0, duration: 1.1, stagger: .12 }, .4)
+       .from('.hero-art .frame', { clipPath: 'inset(0 0 100% 0)', duration: 1.5, ease: 'expo.inOut' }, 0)
+       .from('.hero-art .frame img', { scale: 1.18, duration: 2.2 }, 0)
+       .from('.hero-art .seal', { scale: .4, opacity: 0, duration: 1.1, ease: 'back.out(1.6)' }, 1)
+       .from(['.hero-art .caption', '.hero-cue'], { opacity: 0, duration: .9 }, 1.2);
+      return t;
+    }
+    const line = document.getElementById('loaderLine');
+    const len = line.getTotalLength();
+    line.style.strokeDasharray = len; line.style.strokeDashoffset = len;
+    const open = gsap.timeline();
+    open.to(line, { strokeDashoffset: 0, duration: 1, ease: 'power2.inOut' })
+        .from('.loader .wordmark', { opacity: 0, y: 12, duration: .7, ease: 'expo.out' }, '-=.55')
+        .to(loader, { yPercent: -100, duration: .95, ease: 'expo.inOut' }, '+=.2')
+        .add(heroIntro(), '-=.6')
+        .call(removeLoader, null, '-=1.2');
+    setTimeout(removeLoader, 5000);
+
+    /* headings: word by word */
+    document.querySelectorAll('.sec-head h2').forEach(h => {
+      gsap.from(h.querySelectorAll('.wi'), { yPercent: 115, duration: 1.1, ease: 'expo.out', stagger: .05,
+        scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+    });
+    /* blocks rise in, staggered when several arrive together */
+    ScrollTrigger.batch('.reveal', { start: 'top 90%', once: true,
+      onEnter: els => gsap.from(els, { y: 30, opacity: 0, duration: 1, ease: 'power3.out', stagger: .1 }) });
+    /* photographs: curtain up, then settle */
+    document.querySelectorAll('.gallery .ph, .founder-ph, .studio-ph, .crew .ph').forEach(box => {
+      const img = box.querySelector('img');
+      gsap.from(box, { clipPath: 'inset(0 0 100% 0)', duration: 1.3, ease: 'expo.inOut',
+        scrollTrigger: { trigger: box, start: 'top 88%', once: true } });
+      if (img) gsap.from(img, { scale: 1.16, duration: 1.9, ease: 'expo.out',
+        scrollTrigger: { trigger: box, start: 'top 88%', once: true } });
+    });
+    /* gentle parallax inside the frames */
+    document.querySelectorAll('.gallery .ph img, .founder-ph img').forEach(img => {
+      gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: 'none',
+        scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+    gsap.to('.hero-art .frame', { yPercent: -6, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    /* separators draw in */
+    ScrollTrigger.batch(LINES, { start: 'top 94%', once: true,
+      onEnter: els => els.forEach((el, i) => setTimeout(() => el.classList.add('is-in'), i * 90)) });
+
+    /* floating preview while browsing the styles (pointer devices only) */
+    const peek = document.getElementById('peek');
+    if (peek && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const peekImg = peek.querySelector('img');
+      const list = document.querySelector('.styles');
+      gsap.set(peek, { xPercent: -50, yPercent: -50, scale: .9, rotation: 3 });
+      const xTo = gsap.quickTo(peek, 'x', { duration: .55, ease: 'power3' });
+      const yTo = gsap.quickTo(peek, 'y', { duration: .55, ease: 'power3' });
+      list.addEventListener('mousemove', e => { xTo(e.clientX); yTo(e.clientY); });
+      list.querySelectorAll('li').forEach(li => li.addEventListener('mouseenter', () => {
+        const th = li.querySelector('.th img'); if (th) peekImg.src = th.getAttribute('src');
+        gsap.to(peek, { opacity: 1, scale: 1, rotation: -2, duration: .5, ease: 'power3.out' });
+      }));
+      list.addEventListener('mouseleave', () => gsap.to(peek, { opacity: 0, scale: .9, rotation: 3, duration: .4 }));
+    }
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+  }
+})();
+</script>
+</body>
+</html>
